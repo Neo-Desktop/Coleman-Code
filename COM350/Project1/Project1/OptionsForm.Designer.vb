@@ -107,6 +107,7 @@ Partial Class OptionsForm
         '
         'Button2
         '
+        Me.Button2.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Button2.Location = New System.Drawing.Point(188, 142)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)

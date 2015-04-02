@@ -1,33 +1,28 @@
 ﻿Public Class OptionsForm
 
-    Private CallbackForm As MainForm
-
-    Sub New()
-        InitializeComponent()
-    End Sub
-
-    Sub New(ByVal mainform As Form)
-        InitializeComponent()
-        CallbackForm = mainform
-    End Sub
-
-
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        CallbackForm.SubFormCallback()
         Me.Close()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Options.Directory = TextBox1.Text
-        Options.SongGap = NumericUpDown1.Value
-        Options.PlaylistLength = 1
-        CallbackForm.SubFormCallback()
-        Me.Close()
+        If My.Computer.FileSystem.DirectoryExists(TextBox1.Text) Then
+            Options.Directory = TextBox1.Text
+            Options.SongGap = NumericUpDown1.Value
+            Options.PlaylistLength = 1
+            Me.Close()
+        Else
+            MessageBox.Show("Error, invalid path specified", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If (FolderBrowserDialog1.ShowDialog = Windows.Forms.DialogResult.OK) Then
             TextBox1.Text = FolderBrowserDialog1.SelectedPath
         End If
+    End Sub
+
+    Private Sub OptionsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        TextBox1.Text = My.Computer.FileSystem.SpecialDirectories.MyMusic.ToString()
     End Sub
 End Class
