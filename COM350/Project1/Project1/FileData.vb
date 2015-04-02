@@ -1,6 +1,6 @@
 ﻿Public Class FileData
 
-    Sub New(fileName As String, fileTime As String)
+    Sub New(fileName As String, fileTime As Integer)
         Me.FileName = fileName
         Me.FileTime = fileTime
     End Sub
@@ -26,7 +26,19 @@
     End Property
 
     Overrides Function ToString() As String
-        Dim out As String = Me.FileName & " - [" & Me.FileTime.ToString() & "]"
+        Dim formattedTime As String = String.Empty
+        Dim iSpan As TimeSpan = TimeSpan.FromSeconds(Me.FileTime)
+        If iSpan.Hours > 0 Then
+            formattedTime = iSpan.Hours.ToString.PadLeft(2, "0"c) & ":" & _
+                    iSpan.Minutes.ToString.PadLeft(2, "0"c) & ":" & _
+                    iSpan.Seconds.ToString.PadLeft(2, "0"c)
+        Else
+            formattedTime = iSpan.Minutes.ToString.PadLeft(2, "0"c) & ":" & _
+                    iSpan.Seconds.ToString.PadLeft(2, "0"c)
+        End If
+
+        Dim out As String = Me.FileName & " - [" & formattedTime & "]"
+
         Return out
     End Function
 

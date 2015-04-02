@@ -30,13 +30,9 @@
         End Set
     End Property
 
-    Public Files As List(Of FileData)
-    Sub AddFile(in as String)
+    Public ExtensionsList As String() = {".3gp", ".act", ".aiff", ".aac", ".amr", ".au", ".awb", ".dct", ".dss", ".dvf", ".flac", ".gsm", ".iklax", ".ivs", ".m4a", ".m4p", ".mmf", ".mp3", ".mpc", ".msv", ".ogg", ".oga", ".opus", ".ra", ".rm", ".raw", ".sln", ".tta", ".vox", ".wav", ".wma", ".wv"}
 
-    End Sub
-
-
-
-
+    Public PlaylistTime As Integer = 0
+    Public TotalTime As Integer = 0
 
 End Module

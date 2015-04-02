@@ -134,7 +134,7 @@ Partial Class OptionsForm
         Me.DateTimePicker1.ShowUpDown = True
         Me.DateTimePicker1.Size = New System.Drawing.Size(75, 20)
         Me.DateTimePicker1.TabIndex = 11
-        Me.DateTimePicker1.Value = New Date(2015, 3, 31, 0, 20, 0, 0)
+        Me.DateTimePicker1.Value = New Date(1753, 1, 1, 0, 20, 0, 0)
         '
         'FolderBrowserDialog1
         '
