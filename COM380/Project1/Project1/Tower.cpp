@@ -1,4 +1,10 @@
 
+/***********************************************
+ * Project 1 - COM380 - S. Mayer
+ * By: Amrit Panesar - 77260
+ * Towers of Hanoi
+ ***********************************************/
+
 #include "Tower.h"
 
 int Tower::s_Discs = 0;

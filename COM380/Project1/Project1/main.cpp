@@ -2,7 +2,7 @@
 /***********************************************
  * Project 1 - COM380 - S. Mayer
  * By: Amrit Panesar - 77260
- * Toners of Hanoi
+ * Towers of Hanoi
  ***********************************************/
 
 #include "main.h"

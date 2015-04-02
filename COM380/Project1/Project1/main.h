@@ -1,3 +1,10 @@
+
+/***********************************************
+ * Project 1 - COM380 - S. Mayer
+ * By: Amrit Panesar - 77260
+ * Towers of Hanoi
+ ***********************************************/
+
 #ifdef _WIN32
 	#ifndef VC_EXTRALEAN
 		#define VC_EXTRALEAN

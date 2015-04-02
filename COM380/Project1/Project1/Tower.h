@@ -1,4 +1,10 @@
 
+/***********************************************
+ * Project 1 - COM380 - S. Mayer
+ * By: Amrit Panesar - 77260
+ * Towers of Hanoi
+ ***********************************************/
+
 #ifndef _tower_h
 #define _tower_h
 
