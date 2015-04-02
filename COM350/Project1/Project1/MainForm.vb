@@ -16,6 +16,8 @@
     Public Sub RefreshData()
         ' MessageBox.Show("Do we halt here", "I dunno", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         For Each foundFile As String In My.Computer.FileSystem.GetFiles(Options.Directory)
+
+        Next
     End Sub
 
 End Class

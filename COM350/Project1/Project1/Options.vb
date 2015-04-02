@@ -30,6 +30,13 @@
         End Set
     End Property
 
+    Public Files As List(Of FileData)
+    Sub AddFile(in as String)
+
+    End Sub
+
+
+
 
 
 End Module
