@@ -1,0 +1,43 @@
+ /*****************************************************************************
+ * Project 2 will implement a payroll system using abstract classes.          *
+ *                                                                            *
+ * A company pays its employees on a weekly basis. The employees are of four  *
+ * types: Salaried employees are paid a fixed weekly salary regardless of the *
+ * number of hours worked, hourly employees are paid by the hour and receive  *
+ * overtime pay for all hours worked in excess of 40 hours, commission        *
+ * employees are paid a percentage of their sales, and salaried commission    *
+ * employees receive a base salary plus a percentage of their sales. For the  *
+ * current pay period, the company has decided to reward salaried-commission  *
+ * employees by adding 10% to their base salaries. The company wants to       *
+ * implement a C# application that performs its payroll calculations          *
+ * polymorphically.                                                           *
+ *                                                                            *
+ * Abstract base class Employee declares the “interface” to the hierarchy—    *
+ * that is, the set of methods that an application can invoke on all          *
+ * employee objects. Each employee, regardless of the way his earnings are    *
+ * calculated has a first name, a last name and a social security number, so  *
+ * private instance variables firstName, lastName and socialSecurityNumber    *
+ * appear in abstract base class Employee.                                    *
+ *                                                                            *
+ * Class Employee provides methods Earnings and ToString, in addition to the  *
+ * properties that manipulate Employee’s instance variables. An Earnings      *
+ * method certainly applies to all employees. But each earnings calculation   *
+ * depends on the employee’s class. So we declare Earnings as abstract in     *
+ * base class Employee. Each derived class overrides Earnings with an         *
+ * appropriate implementation. To calculate an employee’s earnings, the       *
+ * application assigns a reference to the employee’s object to a base class   *
+ * Employee variable, then invokes the Earnings method on that variable.      *
+ * You will maintain an array of Employee variables, each of which holds a    *
+ * reference to an Employee object. The application iterates through the      *
+ * array and calls method Earnings for each Employee object. C# processes     *
+ * theses method calls polymorphically. Including Earnings as an abstract     *
+ * method in Employee forces every directly derived class of Employee to      *
+ * override Earnings with a method that performs an appropriate pay           *
+ * calculation.                                                               *
+ *                                                                            *
+ * Method ToString in class Employee returns a string containing the first    *
+ * name, last name, and social security number of the employee. Each derived  *
+ * class of Employee overrides method ToString to create a string             *
+ * representation of an object of that class containing the employee’s type,  *
+ * followed by the rest of the employee’s information.                        *
+ *****************************************************************************/

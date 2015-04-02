@@ -1,0 +1,50 @@
+<%--
+/*********************************************************************
+ * Glacier Point Project - Default Template
+ * Date: 6/10/2014
+ * By: Amrit Panesar - 77260
+ *********************************************************************/
+ --%>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="GlacierPoint.master.cs" Inherits="GlacierPoint.GlacierPoint" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>GlacierPoint.com</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <!-- Header -->
+    <div class="Header">
+        <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/GlacierPoint.jpg" Width="339"
+            Height="90" AlternateText="The GlacierPoint Company Intranet" />
+        <h1>
+            GlacierPoint.com</h1>
+    </div>
+    <!-- Menu -->
+    <div class="Menu">
+        <asp:SiteMapDataSource ID="glacierPointSiteMap" runat="server" ShowStartingNode="false" />
+        <asp:Menu ID="glacierPointMenu" runat="server" 
+            DataSourceID="glacierPointSiteMap" BackColor="#F7F6F3" 
+            DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size="1em" 
+            ForeColor="#7C6F57" StaticSubMenuIndent="10px">
+            <DynamicHoverStyle BackColor="#7C6F57" ForeColor="White" />
+            <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+            <DynamicMenuStyle BackColor="#F7F6F3" />
+            <DynamicSelectedStyle BackColor="#5D7B9D" />
+            <StaticHoverStyle BackColor="#5AACEF" ForeColor="White" />
+            <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+            <StaticSelectedStyle BackColor="#5D7B9D" />
+            <StaticItemTemplate>
+                <img src="Images/<%# Eval("Text")%>.png" alt="+" width="16" height="16" style="border-width: 0;" />
+                <%# Eval("Text")%>
+            </StaticItemTemplate>
+        </asp:Menu>
+    </div>
+    <!-- Content -->
+    <div class="Content">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
+    </div>
+    </form>
+</body>
+</html>

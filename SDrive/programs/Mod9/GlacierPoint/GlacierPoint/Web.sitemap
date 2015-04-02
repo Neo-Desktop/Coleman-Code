@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/*********************************************************************
+ * Glacier Point Project - Website Sitemap
+ * Date: 6/10/2014
+ * By: Amrit Panesar - 77260
+ *********************************************************************/
+ -->
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="~/" title="Root" description="Root">
+    <siteMapNode url="~/Default.aspx" title="Home" description="GlacierPoint Home" />
+    <siteMapNode url="~/HelpDesk.aspx" title="Help Desk" description="GlacierPoint Help Desk" />
+    <siteMapNode url="~/EmployeeDirectory.aspx" title="Employee Directory" description="GlacierPoint Employee Directory" />
+    <siteMapNode url="~/AddressBook.aspx" title="Address Book" description="GlacierPoint Address Book" />
+    <siteMapNode url="~/Departments.aspx" title="Departments" description="GlacierPoint Departments" />
+    <siteMapNode url="~/AdminTools.aspx" title="Admin Tools" description="Admin Tools" />
+  </siteMapNode>
+</siteMap>

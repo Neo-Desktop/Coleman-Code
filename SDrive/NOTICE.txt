@@ -1,0 +1,14 @@
+hi there
+I see you rading this.
+just let me know that you were here
+======================================
+
+-ASP 08/06/2012
+
+--------------------------------------
+
+What is jenv.bat you might ask.
+
+Glad you asked! jenv is my way of launching
+a command paromt with the propper java
+enviroment variables.

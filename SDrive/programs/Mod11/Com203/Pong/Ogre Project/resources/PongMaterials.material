@@ -1,0 +1,51 @@
+// ball material definition
+material ball
+{
+   // define one technique for rendering the Ball
+   technique
+   {
+      // render the Ball in one pass
+      pass
+      {
+         // color the Ball White
+         ambient 1 1 1
+         diffuse 1 1 1
+         specular 1 1 1 255
+      }
+   }
+}
+
+// paddle material definition
+material paddle
+{
+   // define one technique for rendering a Paddle
+   technique
+   {
+      // render a Paddle in one pass
+      pass
+      {
+         // color the Paddle white
+         ambient 1 1 1
+         diffuse 1 1 1
+         specular 1 1 1 255
+      }
+   }
+}
+
+// wall material definition
+material wall
+{
+   // define one technique for rendering a wall
+   technique
+   {
+      // render a wall in one pass
+      pass
+      {
+         // color the wall cyan
+         ambient 0 0 0
+         diffuse 0 0 0
+         specular 0 0 0 255
+      }
+   }
+}
+

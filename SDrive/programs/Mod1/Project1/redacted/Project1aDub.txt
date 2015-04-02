@@ -1,0 +1,77 @@
+/*********************************************
+ *     Program: Project 1a                   *
+ *      Author: Amrit Panesar -ASP ,o/       *
+ * Last Edited: 08/08/2012                   *
+ *       Hours: 0.30 Hours                   *
+ * Purpose: create an application that       *
+ * will display two of the folowing patterns *
+ * ----------------------------------------- *
+ * A) a 6 pointed star                       *
+ * B) a pine tree shape composed of pound    *
+ *     symbols                               *
+ * C) your initals using each inital to      *
+ *     create a large version of that letter *
+ *********************************************/
+
+public class Project1aDub
+{
+	public static void main(String[] args)
+	{
+		String star = "\t\t\t*\t\t\t*\n\n\t\t      * * *\t\t      * * *\n\n\t\t   * * * * * *\t\t   * * * * * *\n\n\t\t"+
+					  "    * * * * * \t\t    * * * * * \n\n\t\t   * * * * * *\t\t   * * * * * *\n\n\t\t      * * *\t\t "+
+					  "     * * *\n\n\t\t\t*\t\t\t*"; 								// This is the star. It is centered.
+		String pine = "\t\t\t#\t\t\t#\n\n\t\t       # #\t\t       # #\n\n\t\t      # # #\t\t      # # #\n\n\t\t     # #"+
+					  " # #\t\t     # # # #\n\n\t\t\t#\t\t\t#"; 			// Pine tree like figure. Centered as well
+		String init = "\t       AAA    SSSSS  PPPPPP  \t       AAA    SSSSS  PPPPPP  \n\t      AAAAA  SS      PP   PP "+
+					  "\t      AAAAA  SS      PP   PP \n\t     AA   AA  SSSSS  PPPPPP  \t     AA   AA  SSSSS  PPPPPP  "+
+					  "\n\t     AAAAAAA      SS PP      \t     AAAAAAA      SS PP      \n\t     AA   AA  SSSSS  PP \t "+
+					  "    AA   AA  SSSSS  PP "; 						// ASP. Centered.
+		String line = "\n\n--------------------------------------------------------------------------------\n\n"; // Flush.
+		System.out.print(star); // Print the star
+		System.out.print(line); // flush
+		System.out.print(pine); // Print the pine
+		System.out.print(line); // flush
+		System.out.print(init); // initals
+		System.out.print("\n\n"); // don't need another line.
+	}
+}
+
+
+=================================================================================================================================
+
+S:\programs\Mod1\Project1>java Project1aDub
+                        *                       *
+
+                      * * *                   * * *
+
+                   * * * * * *             * * * * * *
+
+                    * * * * *               * * * * *
+
+                   * * * * * *             * * * * * *
+
+                      * * *                   * * *
+
+                        *                       *
+
+--------------------------------------------------------------------------------
+
+
+                        #                       #
+
+                       # #                     # #
+
+                      # # #                   # # #
+
+                     # # # #                 # # # #
+
+                        #                       #
+
+--------------------------------------------------------------------------------
+
+
+               AAA    SSSSS  PPPPPP            AAA    SSSSS  PPPPPP
+              AAAAA  SS      PP   PP          AAAAA  SS      PP   PP
+             AA   AA  SSSSS  PPPPPP          AA   AA  SSSSS  PPPPPP
+             AAAAAAA      SS PP              AAAAAAA      SS PP
+             AA   AA  SSSSS  PP              AA   AA  SSSSS  PP

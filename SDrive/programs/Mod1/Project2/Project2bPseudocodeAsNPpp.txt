@@ -1,0 +1,28 @@
+PROMPT for input of hours worked
+STORE hours worked
+CALCULATE gross pay
+	grossPay = hours * rate
+CALCULATE tax
+	Tax = gross * .14
+CALCULATE net pay
+	netPay = gross – taxes
+CALCULATE clothing expense
+	clothing = netPay * .10
+CALCULATE school supply expense
+	supplies = netPay * .01
+CALCULATE remainder
+	remainder = netPay – clothing – supplies
+CALCULATE student savings
+	studentSavings = remainder * .25
+CALCULATE parental savings
+	Parental savings = student Savings * .5
+DISPLAY pay rate
+DISPLAY hours
+DISPLAY gross pay
+DISPLAY taxes
+DISPLAY net pay
+DISPLAY clothing expense
+DISPLAY supply expense
+DISPLAY student savings
+DISPLAY parental savings
+

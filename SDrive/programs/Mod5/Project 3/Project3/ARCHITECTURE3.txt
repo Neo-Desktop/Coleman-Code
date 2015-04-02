@@ -1,0 +1,85 @@
+﻿/******************************************************************************
+ * Project 3 uses interfaces to extend the payroll system developed           *
+ * in Project 2.                                                              *
+ *                                                                            *
+ * Suppose that the company involved wants to perform several accounting      *
+ * operations in a single accounts-payable application—in addition to         *
+ * calculating the payroll earnings that must be paid to each employee, the   *
+ * company must also calculate the payment due on each of several invoices.   *
+ * Though applied to unrelated things, both operations have to do with        *
+ * calculating some kind of payment amount. For an employee, the payment      *
+ * refers to the employee’s earnings. For an invoice, the payment refers to   *
+ * the total cost of the goods listed on the invoice. Can we calculate such   *
+ * different things as the payments due for employees and invoices            *
+ * polymorphically in a single application? Does C# offer a capability that   *
+ * requires that unrelated classes implement a set of common methods? C#      *
+ * interfaces offer exactly this capability.                                  *
+ *                                                                            *
+ * Interfaces define and standardize the ways in which people and systems can *
+ * interact with each other. For example, the controls on a radio serve as an *
+ * interface between a user and the radio’s internal components. The controls *
+ * allow users to perform a limited set of operations (e.g., changing the     *
+ * station, adjusting the volume, choosing between AM and FM), and different  *
+ * radios may implement the controls in different ways (e.g., using push      *
+ * buttons, dials, voice commands). The interface specifies what operations a *
+ * radio must permit users to perform but does specify how the operations are *
+ * performed. Similarly, the interface between a driver and a car with a      *
+ * manual transmission includes the steering wheel, the gear shift, the       *
+ * clutch pedal, the gas pedal and the brake pedal. This same interface is    *
+ * found in nearly all manual-transmission cars, enabling someone who knows   *
+ * how to drive one particular manual-transmission car to drive just about    *
+ * any manual-transmission car. The components may look a bit different, but  *
+ * the general purpose is the same—to allow people to drive the car.          *
+ *                                                                            *
+ * Software objects also communicate via interfaces. A C# interface describes *
+ * a set of methods that can be called on an object, to tell the object to    *
+ * perform some task or return some piece of information, for example. The    *
+ * next part of Project Two introduces an interface named IPayable that       *
+ * describes the functionality of any object that must be capable of being    *
+ * paid and thus must offer a method to determine the proper amount due. an   *
+ * interface declaration begins with the keyword interface and can contain    *
+ * only abstract methods, properties, indexers, and events. All interface     *
+ * members are implicitly declared both public and abstract. In addition,     *
+ * each interface can extend one or more other interfaces to create a more    *
+ * elaborate interface that other classes can implement.                      *
+ *                                                                            *
+ * To use an interface, a class must specify that it implements the           *
+ * interface by listing the interface after the colon ( : ) in the class      *
+ * declaration. Note that this is the same syntax used to indicate            *
+ * inheritance from a base class. A class implementing the interface must     *
+ * declare each member of the interface with the signature specified in the   *
+ * interface declaration. A class the implements an interface but does not    *
+ * implement all the interface’s members is an abstract class—it must be      *
+ * declared abstract and must contain an abstract declaration for each        *
+ * unimplemented member of the interface. Implementing an interface is like   *
+ * signing a contract with the compiler that states, “I will provide an       *
+ * implementation for all the members specified by the interface, or I will   *
+ * declare them abstract.”                                                    *
+ *                                                                            *
+ * An interface is typically used when unrelated classes need to share common *
+ * methods. This allows objects of unrelated classes to be processed          *
+ * polymorphically—objects of classes that implement the same interface can   *
+ * respond to the same method calls. Programmers can create an interface that *
+ * describes the desired functionality, then implement this interface in any  *
+ * classes requiring that functionality. For example, in the accounts-payable *
+ * application for this project, we implement interface IPayable in any class *
+ * that must be able to calculate a payment amount.                           *
+ *                                                                            *
+ * An interface often is used in place of an abstract class when there is no  *
+ * default implementation to inherit—that is, no fields and no default method *
+ * implementations. Like public abstract classes, interfaces are typically    *
+ * public types, so they are normally declared in files by themselves with    *
+ * the same name as the interface and the .cs filename extension.             *
+ *                                                                            *
+ * To build an application that can determine payments for employees and      *
+ * invoices, you will create an interface named IPayable. Interface IPayable  *
+ * contains method GetPaymentAmount that returns a decimal amount that must   *
+ * be paid for an object of any class that implements the interface. Method   *
+ * GetPaymentAmount is a general purpose version of method Earnings of the    *
+ * Employee hierarchy—method Earnings calculates a payment amount specifically* 
+ * for an Employee, while GetPaymentAmount can be applied to a broad range of * 
+ * unrelated objects. After declaring interface IPayable, you will create     *
+ * class Invoice, which implements interface IPayable. Finally, you will      *
+ * update Employee derived classs SalariedEmployee to ‘fit’ into the IPayable *
+ * hierarchy.                                                                 *
+ ******************************************************************************/

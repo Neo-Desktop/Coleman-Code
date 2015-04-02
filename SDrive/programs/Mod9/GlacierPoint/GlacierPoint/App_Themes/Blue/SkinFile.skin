@@ -1,0 +1,23 @@
+<%--
+/*********************************************************************
+ * Glacier Point Project - Skin Defination File
+ * Date: 6/10/2014
+ * By: Amrit Panesar - 77260
+ *********************************************************************/
+--%>
+
+<asp:TextBox runat="server" ForeColor="blue" />
+
+<asp:GridView runat="server" CssClass="GridMain" CellPadding="4" GridLines="None">
+    <RowStyle CssClass="GridRow" />
+    <SelectedRowStyle CssClass="GridSelectedRow" />
+    <HeaderStyle CssClass="GridHeader" />
+    <PagerStyle CssClass="GridRow" />
+</asp:GridView>
+
+<asp:DetailsView runat="server" CssClass="GridMain" CellPadding="4" GridLines="None">
+    <RowStyle CssClass="GridRow" />
+    <HeaderStyle CssClass="GridHeader" />
+    <PagerStyle CssClass="GridRow" />
+</asp:DetailsView>
+

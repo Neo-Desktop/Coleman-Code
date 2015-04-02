@@ -1,0 +1,9 @@
+Code change needed from the handout.
+Use the following code to instantiate your root object in the Pong constructor:
+
+
+#ifdef _DEBUG
+	rootPtr = new Root("Plugins_d.cfg"); // initialize Root object
+#else
+	rootPtr = new Root("Plugins.cfg"); // initialize Root object
+#endif
