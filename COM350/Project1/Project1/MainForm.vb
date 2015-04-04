@@ -17,9 +17,14 @@
 
     Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
         If ListBox1.SelectedIndex >= 0 Then
-            Button1.Enabled = True
-        Else
-            Button1.Enabled = False
+            Dim selectedFile As FileData = ListBox1.Items(ListBox1.SelectedIndex)
+            Dim holdTime = selectedFile.FileTime + Options.PlaylistTime
+
+            If holdTime <= Options.PlaylistLength Then
+                Button1.Enabled = True
+            Else
+                Button1.Enabled = False
+            End If
         End If
     End Sub
 
@@ -32,11 +37,15 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim file As FileData = ListBox1.Items(ListBox1.SelectedIndex)
-        ListBox1.Items.RemoveAt(ListBox1.SelectedIndex)
-        RemoveFileFromTotal(file)
-        ListBox2.Items.Add(file)
-        AddFileToPlaylist(file)
+        If ListBox1.SelectedIndex >= 0 Then
+            Dim file As FileData = ListBox1.Items(ListBox1.SelectedIndex)
+            ListBox1.Items.RemoveAt(ListBox1.SelectedIndex)
+            RemoveFileFromTotal(file)
+            ListBox2.Items.Add(file)
+            AddFileToPlaylist(file)
+        End If
+        ListBox1.SelectedIndex = -1
+        Button1.Enabled = False
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -50,11 +59,15 @@
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Dim file As FileData = ListBox2.Items(ListBox2.SelectedIndex)
-        ListBox2.Items.RemoveAt(ListBox2.SelectedIndex)
-        RemoveFileFromPlaylist(file)
-        ListBox1.Items.Add(file)
-        AddFileToTotal(file)
+        If ListBox2.SelectedIndex >= 0 Then
+            Dim file As FileData = ListBox2.Items(ListBox2.SelectedIndex)
+            ListBox2.Items.RemoveAt(ListBox2.SelectedIndex)
+            RemoveFileFromPlaylist(file)
+            ListBox1.Items.Add(file)
+            AddFileToTotal(file)
+        End If
+        ListBox2.SelectedIndex = -1
+        Button4.Enabled = False
     End Sub
 
 
@@ -68,7 +81,17 @@
         ListBox1.Items.Clear()
         ListBox2.Items.Clear()
 
-        Label6.Text = Options.PlaylistLength
+        Dim iSpan As TimeSpan = TimeSpan.FromSeconds(Options.PlaylistLength)
+        Dim formattedTime As String = String.Empty
+        If iSpan.Hours > 0 Then
+            formattedTime = iSpan.Hours.ToString.PadLeft(2, "0"c) & ":" & _
+                    iSpan.Minutes.ToString.PadLeft(2, "0"c) & ":" & _
+                    iSpan.Seconds.ToString.PadLeft(2, "0"c)
+        Else
+            formattedTime = iSpan.Minutes.ToString.PadLeft(2, "0"c) & ":" & _
+                    iSpan.Seconds.ToString.PadLeft(2, "0"c)
+        End If
+        Label6.Text = formattedTime
 
         For Each foundFile As String In My.Computer.FileSystem.GetFiles(Options.Directory)
             foundFile = My.Computer.FileSystem.GetName(foundFile)
@@ -102,6 +125,7 @@
                     iSpan.Seconds.ToString.PadLeft(2, "0"c)
         End If
         Label3.Text = formattedTime
+
     End Sub
 
     Private Sub RemoveFileFromTotal(file As FileData)

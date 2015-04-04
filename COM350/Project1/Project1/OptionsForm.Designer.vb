@@ -130,6 +130,7 @@ Partial Class OptionsForm
         Me.DateTimePicker1.CustomFormat = "HH:mm:ss"
         Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.DateTimePicker1.Location = New System.Drawing.Point(135, 105)
+        Me.DateTimePicker1.MaxDate = New Date(1753, 1, 2, 0, 0, 0, 0)
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.ShowUpDown = True
         Me.DateTimePicker1.Size = New System.Drawing.Size(75, 20)

@@ -8,7 +8,8 @@
         If My.Computer.FileSystem.DirectoryExists(TextBox1.Text) Then
             Options.Directory = TextBox1.Text
             Options.SongGap = NumericUpDown1.Value
-            Options.PlaylistLength = 1
+            Dim hold As Long = DateTimePicker1.Value.Ticks - DateTimePicker1.MinDate.Ticks
+            Options.PlaylistLength = New TimeSpan(hold).TotalSeconds
             Me.Close()
         Else
             MessageBox.Show("Error, invalid path specified", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
