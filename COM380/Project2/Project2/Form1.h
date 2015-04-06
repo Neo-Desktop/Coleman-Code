@@ -123,6 +123,7 @@ namespace Project2 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Form1::typeid));
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->numericUpDown1 = (gcnew System::Windows::Forms::NumericUpDown());
 			this->maskedTextBox2 = (gcnew System::Windows::Forms::MaskedTextBox());
@@ -956,6 +957,7 @@ namespace Project2 {
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->menuStrip1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
@@ -1084,7 +1086,15 @@ private: System::Void dateTimePicker2_ValueChanged(System::Object^  sender, Syst
 		 }
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e)
 		 {
-			 Application::Exit();
+			  System::Windows::Forms::DialogResult d = MessageBox::Show("Are you sure you wish to exit?",
+																		"Application Close",
+																		MessageBoxButtons::YesNo,
+																		MessageBoxIcon::Question,
+																		MessageBoxDefaultButton::Button2);
+			 if ( d == System::Windows::Forms::DialogResult::Yes )
+			 {
+				 Application::Exit();
+			 }
 		 }
 private: System::Void update_hours()
 		 {
@@ -1118,7 +1128,7 @@ private: System::Void update_hours()
 			 Decimal calcOverTime = overtime * hours * (Decimal)1.5;
 			 textBox7->Text = String::Format("{0:C2}", calcOverTime);
 
-			 Decimal total = calcWage = calcOverTime;
+			 Decimal total = calcWage + calcOverTime;
 			 textBox8->Text = String::Format("{0:C2}", total);
 			 
 		 }
@@ -1145,7 +1155,7 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 		 }
 private: System::Void numericUpDown1_ValueChanged(System::Object^  sender, System::EventArgs^  e)
 		 {
-			 update_hours()
+			 update_hours();
 		 }
 };
 }

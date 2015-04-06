@@ -45,7 +45,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="app.ico">
+    <Image Include="..\Project2.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
