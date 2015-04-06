@@ -51,6 +51,16 @@
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Button1.Enabled = False
         Button2.Enabled = False
+
+        For index As Integer = ListBox1.Items.Count() - 1 To 0 Step -1
+            Dim file As FileData = ListBox1.Items(index)
+            If (file.FileTime + Options.PlaylistTime < Options.PlaylistLength) Then
+                ListBox1.Items.RemoveAt(index)
+                RemoveFileFromTotal(file)
+                ListBox2.Items.Add(file)
+                AddFileToPlaylist(file)
+            End If
+        Next
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
