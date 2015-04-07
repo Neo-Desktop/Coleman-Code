@@ -8,6 +8,8 @@ namespace Project2 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::IO;
+	using namespace System::Text;
 
 	/// <summary>
 	/// Summary for Form1
@@ -109,6 +111,7 @@ namespace Project2 {
 	private: System::Windows::Forms::Label^  label24;
 	private: System::Windows::Forms::NumericUpDown^  numericUpDown1;
 	private: System::Windows::Forms::Button^  button3;
+	private: System::Windows::Forms::SaveFileDialog^  saveFileDialog1;
 
 	private:
 		/// <summary>
@@ -197,6 +200,7 @@ namespace Project2 {
 			this->label20 = (gcnew System::Windows::Forms::Label());
 			this->label19 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->numericUpDown1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
@@ -941,8 +945,15 @@ namespace Project2 {
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 0;
-			this->button1->Text = L"&Process";
+			this->button1->Text = L"&Save";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
+			// 
+			// saveFileDialog1
+			// 
+			this->saveFileDialog1->CreatePrompt = true;
+			this->saveFileDialog1->DefaultExt = L"txt";
+			this->saveFileDialog1->Title = L"Timecard save";
 			// 
 			// Form1
 			// 
@@ -1066,7 +1077,12 @@ private: System::Void dateTimePicker1_ValueChanged(System::Object^  sender, Syst
 			 for (int i = 0; i < dayLabels.Count; i++)
 			 {
 				 hold = safe_cast<Label^>(dayLabels[i]);
-				 hold->Text = helper.DayOfWeek.ToString();
+				 String^ holds = helper.DayOfWeek.ToString();
+				 if (holds->Length <= 1)
+				 {
+					 holds = "0" + holds;
+				 }
+				 hold->Text = holds;
 				 helper = helper.AddDays(1);
 			 }
 
@@ -1074,7 +1090,16 @@ private: System::Void dateTimePicker1_ValueChanged(System::Object^  sender, Syst
 			 for (int i = 0; i < dateLabels.Count; i++)
 			 {
 				 hold = safe_cast<Label^>(dateLabels[i]);
-				 hold->Text = helper.Month + "/" + helper.Day;
+
+				 String^ holds1 = helper.Month.ToString();
+				 if (holds1->Length <=1)
+					 holds1 = "0" + holds1;
+
+				 String^ holds2 = helper.Day.ToString();
+				 if (holds2->Length <=1)
+					 holds2 = "0" + holds2;
+
+				 hold->Text = holds1 + "/" + holds2;
 				 helper = helper.AddDays(1);
 			 }
 		 }
@@ -1098,7 +1123,8 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 		 }
 private: System::Void update_hours()
 		 {
-			 Decimal hours = 0;
+			 Decimal hours1 = 0;
+			 Decimal hours2 = 0;
 			 Decimal tryHours = 0;
 
 			 MaskedTextBox^ hold;
@@ -1106,26 +1132,42 @@ private: System::Void update_hours()
 			 {
 				 hold = safe_cast<MaskedTextBox^>(hourTextBoxes[i]);
 				 Decimal::TryParse(hold->Text, tryHours);
-				 hours += tryHours;
+				 if (i < hourTextBoxes.Count/2)
+				 {
+					 hours1 += tryHours;
+				 }
+				 else
+				 {
+					 hours2 += tryHours;
+				 }
 			 }
-			 Decimal overtime = hours - 80;
-			 if (overtime > 0)
+			 Decimal overtime1 = hours1 - 40;
+			 Decimal overtime2 = hours2 - 40;
+			 if (overtime1 > 0)
 			 {
-				 hours = 80;
+				 hours1 = 40;
 			 }
 			 else
 			 {
-				 overtime = 0;
+				 overtime1 = 0;
+			 }
+			 if (overtime2 > 0)
+			 {
+				 hours2 = 40;
+			 }
+			 else
+			 {
+				 overtime2 = 0;
 			 }
 
-			 textBox1->Text = String::Format("{0:00.00}", hours);
-			 textBox5->Text = String::Format("{0:00.00}", overtime);
+			 textBox1->Text = String::Format("{0:00.00}", hours1 + hours2);
+			 textBox5->Text = String::Format("{0:00.00}", overtime1 + overtime2);
 
 			 Decimal wage = 0;
 			 Decimal::TryParse(numericUpDown1->Text, wage);
-			 Decimal calcWage = wage * hours;
+			 Decimal calcWage = (wage * hours1) + (wage * hours2);
 			 textBox6->Text = String::Format("{0:C2}", calcWage );
-			 Decimal calcOverTime = overtime * hours * (Decimal)1.5;
+			 Decimal calcOverTime = (wage * (Decimal)1.5 * overtime1) + (wage * (Decimal)1.5 * overtime2);
 			 textBox7->Text = String::Format("{0:C2}", calcOverTime);
 
 			 Decimal total = calcWage + calcOverTime;
@@ -1156,6 +1198,127 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 private: System::Void numericUpDown1_ValueChanged(System::Object^  sender, System::EventArgs^  e)
 		 {
 			 update_hours();
+		 }
+private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e)
+		 {
+			 saveFileDialog1->FileName = "Employee-" + maskedTextBox2->Text + ".txt";
+			 System::Windows::Forms::DialogResult d = saveFileDialog1->ShowDialog();
+
+			 if ( d == System::Windows::Forms::DialogResult::OK)
+			 {
+				 //MessageBox::Show(saveFileDialog1->FileName, "Save file");
+				 FileInfo^ fi1 = gcnew FileInfo( saveFileDialog1->FileName );
+				 StreamWriter^ sw = fi1->CreateText();
+
+				 Decimal wage = 0;
+				 Decimal::TryParse(numericUpDown1->Text, wage);
+
+				 if (fi1->Length <= 0)
+				 {
+					 try
+					 {
+						 sw->WriteLine("EMPLOYEE TIMECARD");
+						 sw->WriteLine(maskedTextBox2->Text +"\t"+ textBox3->Text +"\t"+ textBox4->Text +".\t"+ textBox2->Text);
+						 sw->WriteLine("Pay rate: $" + wage.ToString() + "/hr");
+						 sw->WriteLine("-----------------------------");
+					 }
+					 catch (Exception^ e)
+					 {
+						 MessageBox::Show("Error creating file", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+					 }
+				 }
+				 try
+				 {
+					Label^ hold1;
+					MaskedTextBox^ hold2;
+					StringBuilder^ out1 = gcnew StringBuilder("",50);
+					StringBuilder^ out2 = gcnew StringBuilder("",50);
+					StringBuilder^ out3 = gcnew StringBuilder("",50);
+					StringBuilder^ out4 = gcnew StringBuilder("",50);
+					StringBuilder^ out5 = gcnew StringBuilder("",50);
+
+					Decimal hours1 = 0;
+					Decimal hours2 = 0;
+					Decimal tryHours = 0;
+
+					for (int i = 0; i < dateLabels.Count; i++)
+					{
+						hold1 = safe_cast<Label^>(dateLabels[i]);
+						hold2 = safe_cast<MaskedTextBox^>(hourTextBoxes[i]);
+						Decimal::TryParse(hold2->Text, tryHours);
+
+						if (i < dateLabels.Count/2)
+						{
+							out1->Append(hold1->Text + "\t");
+							out2->Append(hold2->Text + "\t");
+							hours1 += tryHours;
+						}
+						else
+						{
+							out3->Append(hold1->Text + "\t");
+							out4->Append(hold2->Text + "\t");
+							hours2 += tryHours;
+						}
+					}
+
+					Decimal overtime1 = hours1 - 40;
+					Decimal overtime2 = hours2 - 40;
+					if (overtime1 > 0)
+					{
+						hours1 = 40;
+					}
+					else
+					{
+						overtime1 = 0;
+					}
+					if (overtime2 > 0)
+					{
+						hours2 = 40;
+					}
+					else
+					{
+						overtime2 = 0;
+					}
+
+					out5->Append("Regular hours: ");
+					out5->AppendFormat("{0:00.00}\t", hours1 + hours2);
+					out5->Append("Overtime hours: ");
+					out5->AppendFormat("{0:00.00}\n", overtime1 + overtime2);
+					
+					Decimal calcWage = (wage * hours1) + (wage * hours2);
+					out5->Append("Regular pay: ");
+					out5->AppendFormat("{0:C2}\t", calcWage);
+
+					Decimal calcOverTime = (wage * (Decimal)1.5 * overtime1) + (wage * (Decimal)1.5 * overtime2);
+					out5->Append("Overtime pay: ");
+					out5->AppendFormat("{0:C2}\n\n", calcOverTime);
+
+					Decimal total = calcWage + calcOverTime;
+					out5->Append("Total pay: ");
+					out5->AppendFormat("{0:C2}", total);
+
+					sw->WriteLine(out1->ToString());
+					sw->WriteLine(out2->ToString());
+					sw->WriteLine("");
+					sw->WriteLine(out3->ToString());
+					sw->WriteLine(out4->ToString());
+					sw->WriteLine("");
+					sw->WriteLine(out5->ToString());
+				 }
+				 catch (Exception^ e)
+				 {
+					MessageBox::Show("Error creating file", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				 }
+				 finally
+				 {
+					 if ( sw )
+						delete (IDisposable^)sw;
+				 }
+			 }
+			 else
+			 {
+				 MessageBox::Show("File save canceled", "Error", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+			 }
 		 }
 };
 }
