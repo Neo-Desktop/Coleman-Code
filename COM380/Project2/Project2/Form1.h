@@ -1317,7 +1317,7 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 			 }
 			 else
 			 {
-				 MessageBox::Show("File save canceled", "Error", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+				 MessageBox::Show("File save cancelled", "Error", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
 			 }
 		 }
 };
