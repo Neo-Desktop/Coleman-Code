@@ -67,6 +67,7 @@ namespace Project3 {
 			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutwayToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
@@ -74,7 +75,6 @@ namespace Project3 {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->aboutwayToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
@@ -114,6 +114,7 @@ namespace Project3 {
 			this->exitToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Alt | System::Windows::Forms::Keys::F4));
 			this->exitToolStripMenuItem->Size = System::Drawing::Size(155, 22);
 			this->exitToolStripMenuItem->Text = L"&Exitway";
+			this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::exitToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -122,6 +123,14 @@ namespace Project3 {
 			this->helpToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Alt | System::Windows::Forms::Keys::H));
 			this->helpToolStripMenuItem->Size = System::Drawing::Size(54, 20);
 			this->helpToolStripMenuItem->Text = L"Elp&hay";
+			// 
+			// aboutwayToolStripMenuItem
+			// 
+			this->aboutwayToolStripMenuItem->Name = L"aboutwayToolStripMenuItem";
+			this->aboutwayToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>(((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Alt) 
+				| System::Windows::Forms::Keys::A));
+			this->aboutwayToolStripMenuItem->Size = System::Drawing::Size(193, 22);
+			this->aboutwayToolStripMenuItem->Text = L"&Aboutway";
 			// 
 			// groupBox1
 			// 
@@ -190,14 +199,6 @@ namespace Project3 {
 			this->textBox3->Size = System::Drawing::Size(490, 151);
 			this->textBox3->TabIndex = 0;
 			// 
-			// aboutwayToolStripMenuItem
-			// 
-			this->aboutwayToolStripMenuItem->Name = L"aboutwayToolStripMenuItem";
-			this->aboutwayToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>(((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Alt) 
-				| System::Windows::Forms::Keys::A));
-			this->aboutwayToolStripMenuItem->Size = System::Drawing::Size(193, 22);
-			this->aboutwayToolStripMenuItem->Text = L"&Aboutway";
-			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -212,6 +213,7 @@ namespace Project3 {
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form1";
 			this->Text = L"Igpay Atinlay Anslatortay";
+			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->groupBox1->ResumeLayout(false);
@@ -225,10 +227,47 @@ namespace Project3 {
 
 		}
 #pragma endregion
-	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e)
+private: String^ vowels;
+private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e)
+		 {
+			 //translate to pig latin
+			 String^ translated = gcnew String("");
+			 auto words = textBox1->Text->Split(' ');
+			 for each (auto word in words)
 			 {
-
+				 //MessageBox::Show(word);
+				 String^ t1 = word->Substring(0, 1);
+				 if (vowels->Contains(t1))
+				 {
+					 translated += word + "way" + " ";
+				 }
+				 else
+				 {
+					 String^ t2 = word->Substring(1);
+					 String^ c1 = c1 = t2->Substring(0, 1);
+					 if (t1->ToUpper() == t1)
+					 {
+						 c1 = c1->ToUpperInvariant();
+					 }
+					 
+					 c1 += t2->Substring(1);
+					 c1 += t1->ToLowerInvariant();
+					 c1 += "ay" + " ";
+					 translated += c1;
+				 }
 			 }
+			 textBox2->Text = translated;
+		 }
+
+private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e)
+		 {
+			 vowels = gcnew String("aeiouy\u00E0\u00E1\u00E2\u00E3\u00E4\u00E5\u00E6\u00E8\u00E9\u00EA\u00EB\u00EC\u00ED\u00EE\u00EF\u00F2\u00F3\u00F4\u00F5\u00F6\u00F8\u00F9\u00FA\u00FB\u00FC\u00FD\u00FF");
+		 }
+
+private: System::Void exitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+		 {
+			 Application::Exit();
+		 }
 };
 }
 
