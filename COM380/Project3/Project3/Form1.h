@@ -179,6 +179,7 @@ namespace Project3 {
 			this->button2->TabIndex = 5;
 			this->button2->Text = L"Eray-Anslatetray!";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &Form1::button2_Click);
 			// 
 			// groupBox3
 			// 
@@ -228,45 +229,115 @@ namespace Project3 {
 		}
 #pragma endregion
 private: String^ vowels;
-private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e)
-		 {
-			 //translate to pig latin
-			 String^ translated = gcnew String("");
-			 auto words = textBox1->Text->Split(' ');
-			 for each (auto word in words)
-			 {
-				 //MessageBox::Show(word);
-				 String^ t1 = word->Substring(0, 1);
-				 if (vowels->Contains(t1))
-				 {
-					 translated += word + "way" + " ";
-				 }
-				 else
-				 {
-					 String^ t2 = word->Substring(1);
-					 String^ c1 = c1 = t2->Substring(0, 1);
-					 if (t1->ToUpper() == t1)
-					 {
-						 c1 = c1->ToUpperInvariant();
-					 }
-					 
-					 c1 += t2->Substring(1);
-					 c1 += t1->ToLowerInvariant();
-					 c1 += "ay" + " ";
-					 translated += c1;
-				 }
-			 }
-			 textBox2->Text = translated;
-		 }
+private: String^ numbers;
 
 private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e)
 		 {
-			 vowels = gcnew String("aeiouy\u00E0\u00E1\u00E2\u00E3\u00E4\u00E5\u00E6\u00E8\u00E9\u00EA\u00EB\u00EC\u00ED\u00EE\u00EF\u00F2\u00F3\u00F4\u00F5\u00F6\u00F8\u00F9\u00FA\u00FB\u00FC\u00FD\u00FF");
+			 vowels = gcnew String("aeiouw\u00E0\u00E1\u00E2\u00E3\u00E4\u00E5\u00E6\u00E8\u00E9\u00EA\u00EB\u00EC\u00ED\u00EE\u00EF\u00F2\u00F3\u00F4\u00F5\u00F6\u00F8\u00F9\u00FA\u00FB\u00FC\u00FD\u00FF");
+			 numbers = gcnew String("0123456789");
 		 }
 
 private: System::Void exitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 		 {
 			 Application::Exit();
+		 }
+
+private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e)
+		 {
+			 textBox1->Text->Trim();
+			 //translate to pig latin
+			 String^ translated = gcnew String("");
+			 auto words = textBox1->Text->Split(' ');
+			 for each (auto word in words)
+			 {
+				 if (word->Length > 2)
+				 {
+					 String^ t1 = word->Substring(0, 1);
+					 String^ tt = word->Substring(0, 2)->ToLowerInvariant();
+					 if (tt->Equals("qu"))
+					 {
+						 t1 = word->Substring(0, 2);
+					 }
+					 if (!numbers->Contains(t1))
+					 {
+						 if (vowels->Contains(t1))
+						 {
+							 translated += word + "way" + " ";
+						 }
+						 else
+						 {
+							 String^ t2 = word->Substring(1);
+							 if (t1->Length >= 2)
+							 {
+								 t2 = word->Substring(t1->Length);
+							 }
+						 
+							 String^ c1 = c1 = t2->Substring(0, 1);
+							 if (t1->ToUpperInvariant() == t1)
+							 {
+								 c1 = c1->ToUpperInvariant();
+							 }
+					 
+							 c1 += t2->Substring(1);
+							 c1 += t1->ToLowerInvariant();
+							 c1 += "ay" + " ";
+							 translated += c1;
+						 }
+					 }
+					 else
+					 {
+						 translated += word + " ";
+					 }
+				 }
+				 else
+				 {
+					 translated += word + "way ";
+				 }
+			 }
+			 textBox2->Text = translated->Trim();
+		 }
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e)
+		 {
+			 textBox2->Text->Trim();
+			 String^ translated = gcnew String("");
+			 auto words = textBox2->Text->Split(' ');
+			 for each (auto word in words)
+			 {
+				 String^ wordbuff = gcnew String("");
+
+				 int start = word->LastIndexOf("ay");
+				 String^ t1 = word->Substring(start, 2);
+				 String^ d1 = word->Substring(0, 1);
+				 String^ c1 = word->Substring(start - 1, 1);
+				 String^ t2 = word->Substring(1, start -2);
+
+				 if (t1->Equals("ay"))
+				 {
+					 if (d1->ToUpperInvariant() == d1) // is caps
+					 {
+						c1 = c1->ToUpperInvariant();
+						d1 = d1->ToLowerInvariant();
+					 }
+					 if (c1->ToLowerInvariant()->Equals("w") && vowels->Contains(d1))
+					 {
+						 wordbuff += d1;
+					 }
+					 else
+					 {
+						 wordbuff += c1 + d1;
+					 }
+
+					 wordbuff += t2;
+					 translated += wordbuff + " ";
+					 // translated += t2 + " ";
+				 }
+				 else
+				 {
+					 translated += word + " ";
+				 }
+			 }
+
+			 textBox3->Text = translated;
 		 }
 };
 }
