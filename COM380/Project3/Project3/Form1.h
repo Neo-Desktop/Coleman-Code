@@ -253,41 +253,43 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 				 if (word->Length > 2)
 				 {
 					 String^ t1 = word->Substring(0, 1);
-					 String^ tt = word->Substring(0, 2)->ToLowerInvariant();
-					 if (tt->Equals("qu"))
-					 {
-						 t1 = word->Substring(0, 2);
-					 }
-					 if (!numbers->Contains(t1))
-					 {
-						 if (vowels->Contains(t1))
-						 {
-							 translated += word + "way" + " ";
-						 }
-						 else
-						 {
-							 String^ t2 = word->Substring(1);
-							 if (t1->Length >= 2)
-							 {
-								 t2 = word->Substring(t1->Length);
-							 }
+					/*
+					String^ tt = word->Substring(0, 2)->ToLowerInvariant();
+					if (tt->Equals("qu"))
+					{
+						t1 = word->Substring(0, 2);
+					}
+					*/
+					if (!numbers->Contains(t1))
+					{
+						if (vowels->Contains(t1))
+						{
+							translated += word + "way" + " ";
+						}
+						else
+						{
+							String^ t2 = word->Substring(1);
+							if (t1->Length >= 2)
+							{
+								t2 = word->Substring(t1->Length);
+							}
 						 
-							 String^ c1 = c1 = t2->Substring(0, 1);
-							 if (t1->ToUpperInvariant() == t1)
-							 {
-								 c1 = c1->ToUpperInvariant();
-							 }
+							String^ c1 = c1 = t2->Substring(0, 1);
+							if (t1->ToUpperInvariant() == t1)
+							{
+								c1 = c1->ToUpperInvariant();
+							}
 					 
-							 c1 += t2->Substring(1);
-							 c1 += t1->ToLowerInvariant();
-							 c1 += "ay" + " ";
-							 translated += c1;
-						 }
-					 }
-					 else
-					 {
-						 translated += word + " ";
-					 }
+							c1 += t2->Substring(1);
+							c1 += t1->ToLowerInvariant();
+							c1 += "ay" + " ";
+							translated += c1;
+						}
+					}
+					else
+					{
+						translated += word + " ";
+					}
 				 }
 				 else
 				 {
@@ -305,35 +307,42 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 			 {
 				 String^ wordbuff = gcnew String("");
 
-				 int start = word->LastIndexOf("ay");
-				 String^ t1 = word->Substring(start, 2);
 				 String^ d1 = word->Substring(0, 1);
-				 String^ c1 = word->Substring(start - 1, 1);
-				 String^ t2 = word->Substring(1, start -2);
-
-				 if (t1->Equals("ay"))
+				 if (!numbers->Contains(d1))
 				 {
-					 if (d1->ToUpperInvariant() == d1) // is caps
+					 int start = word->LastIndexOf("ay");
+					 String^ t1 = word->Substring(start, 2);
+					 String^ c1 = word->Substring(start - 1, 1);
+					 String^ t2 = word->Substring(1, start -2);
+
+					 if (t1->Equals("ay"))
 					 {
-						c1 = c1->ToUpperInvariant();
-						d1 = d1->ToLowerInvariant();
-					 }
-					 if (c1->ToLowerInvariant()->Equals("w") && vowels->Contains(d1))
-					 {
-						 wordbuff += d1;
+						 if (d1->ToUpperInvariant() == d1) // is caps
+						 {
+							c1 = c1->ToUpperInvariant();
+							d1 = d1->ToLowerInvariant();
+						 }
+						 if (c1->ToLowerInvariant()->Equals("w") && vowels->Contains(d1))
+						 {
+							 wordbuff += d1;
+						 }
+						 else
+						 {
+							 wordbuff += c1 + d1;
+						 }
+
+						 wordbuff += t2;
+						 translated += wordbuff + " ";
+						 // translated += t2 + " ";
 					 }
 					 else
 					 {
-						 wordbuff += c1 + d1;
+						 translated += word + " ";
 					 }
-
-					 wordbuff += t2;
-					 translated += wordbuff + " ";
-					 // translated += t2 + " ";
 				 }
 				 else
 				 {
-					 translated += word + " ";
+					translated += word + " ";	
 				 }
 			 }
 
