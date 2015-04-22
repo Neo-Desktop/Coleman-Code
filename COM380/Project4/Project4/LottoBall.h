@@ -13,12 +13,20 @@ namespace Project4
 	{
 
 	public:
-		LottoBall();
+		LottoBall(int minval, int maxval);
 		~LottoBall();
 
 		int getCurrentValue();
+		int num;
+
+		System::Void start();
+		System::Void stop();
 
 	private:
+		int minVal;
+		int maxVal;
+
+		bool threadStop;
 		Thread^ thread;
 		System::Void run();
 
