@@ -1,35 +1,40 @@
-#pragma once
+#include "stdafx.h"
+#include "Form1.h"
 
-namespace Project4
+using namespace System;
+using namespace System::Collections;
+using namespace System::Collections::Generic;
+using namespace System::Threading;
+using namespace System::Threading::Tasks;
+using namespace System::Data;
+using namespace Project4;
+
+
+public ref class LottoBall
 {
-	using namespace System;
-	using namespace System::Collections;
-	using namespace System::Collections::Generic;
-	using namespace System::Threading;
-	using namespace System::Threading::Tasks;
-	using namespace System::Data;
 
-	public ref class LottoBall
-	{
+public:
+	LottoBall(int minval, int maxval, Form1^ form1);
+	~LottoBall();
 
-	public:
-		LottoBall(int minval, int maxval);
-		~LottoBall();
+	int getCurrentValue();
+	int num;
 
-		int getCurrentValue();
-		int num;
+	System::Void start();
+	System::Void stop();
+	System::Void initThread();
 
-		System::Void start();
-		System::Void stop();
+private:
+	int minVal;
+	int maxVal;
+	int seedValue;
 
-	private:
-		int minVal;
-		int maxVal;
+	Form1^ formptr;
 
-		bool threadStop;
-		Thread^ thread;
-		System::Void run();
+	Random^ r;
 
-	};
+	bool threadStop;
+	Thread^ thread;
+	System::Void run();
 
-}
+};

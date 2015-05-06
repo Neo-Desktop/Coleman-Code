@@ -2,9 +2,15 @@
 
     Private _searchResults As SearchResults = New SearchResults
 
-    Public FileType As String
-    Public IsCaseSensitive As Boolean
-    Public Pattern As String
+    Public Property FileType As String
+    Public Property IsCaseSensitive As Boolean
+    Public Property Pattern As String
+
+    Sub New(FT As String, ICS As Boolean, P As String)
+        FileType = FT
+        IsCaseSensitive = ICS
+        Pattern = P
+    End Sub
 
     Sub Search()
 

@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 #include "LottoBall.h"
 
 namespace Project4
@@ -43,12 +44,19 @@ namespace Project4
 	private: System::Windows::Forms::ToolStripMenuItem^  helpToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  aboutToolStripMenuItem;
 	private: System::Windows::Forms::GroupBox^  groupBox1;
-	private: System::Windows::Forms::TextBox^  textBox6;
-	private: System::Windows::Forms::TextBox^  textBox5;
-	private: System::Windows::Forms::TextBox^  textBox4;
-	private: System::Windows::Forms::TextBox^  textBox3;
-	private: System::Windows::Forms::TextBox^  textBox2;
-	private: System::Windows::Forms::TextBox^  textBox1;
+	public: System::Windows::Forms::TextBox^  textBox6;
+	private: 
+	public: System::Windows::Forms::TextBox^  textBox5;
+	public: System::Windows::Forms::TextBox^  textBox4;
+	public: System::Windows::Forms::TextBox^  textBox3;
+	public: System::Windows::Forms::TextBox^  textBox2;
+	public: System::Windows::Forms::TextBox^  textBox1;
+
+
+
+
+
+
 	private: System::Windows::Forms::Label^  label6;
 	private: System::Windows::Forms::Label^  label5;
 	private: System::Windows::Forms::Label^  label4;
@@ -225,6 +233,7 @@ namespace Project4
 			// 
 			// radioButton1
 			// 
+			this->radioButton1->AutoCheck = false;
 			this->radioButton1->AutoSize = true;
 			this->radioButton1->Location = System::Drawing::Point(51, 86);
 			this->radioButton1->Name = L"radioButton1";
@@ -394,7 +403,35 @@ namespace Project4
 #pragma endregion
 
 	public: List<LottoBall^>^ balls;
-	public: volatile static array<int>^ numbers;
+	public: static array<int>^ numbers;
+	public: System::Void affixNumber(int index, int number)
+			{
+				this->numbers[index] = number;
+				switch (index)
+				{
+				case 0:
+					textBox5->Text = number.ToString("D2");
+					break;
+				case 1:
+					textBox4->Text = number.ToString("D2");
+					break;
+				case 2:
+					textBox4->Text = number.ToString("D2");
+					break;
+				case 3:
+					textBox3->Text = number.ToString("D2");
+					break;
+				case 4:
+					textBox2->Text = number.ToString("D2");
+					break;
+				case 5:
+					textBox1->Text = number.ToString("D2");
+					break;
+				case 6:
+					textBox6->Text = number.ToString("D2");
+					break;
+				}
+			}
 
 	private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e)
 			 {
@@ -403,10 +440,10 @@ namespace Project4
 				 
 				 for (int i = 0; i < 5; i++)
 				 {
-					 balls->Add(gcnew LottoBall(1, 75));
+					 balls->Add(gcnew LottoBall(1, 75, this));
 				 }
 
-				 balls->Add(gcnew LottoBall(1, 15));
+				 balls->Add(gcnew LottoBall(1, 15, this));
 			 }
 
 	private: System::Void exitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
