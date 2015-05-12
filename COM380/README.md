@@ -10,4 +10,7 @@
 	- Finished at: d5bfd3186e3c8e8bc2bb6828a1d1bd143cf026e7
 - [Project 3](Project3/)
 	- Igpay Atlay Anslatortray
-	- Inway Oggresspray
+	- Inishedfay atlay: 46e53595813ca55ba0e45799dde7bd34b500bdab
+- [Project 4](Project4/)
+	- Lotto Ball Picker
+	- Finished at: a73a4190cba7a02d126007c1f7373a31ef09873f
