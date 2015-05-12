@@ -1,5 +1,5 @@
+#pragma once
 #include "stdafx.h"
-#include "Form1.h"
 
 using namespace System;
 using namespace System::Collections;
@@ -7,34 +7,44 @@ using namespace System::Collections::Generic;
 using namespace System::Threading;
 using namespace System::Threading::Tasks;
 using namespace System::Data;
-using namespace Project4;
 
-
-public ref class LottoBall
+namespace Project4
 {
+	ref class Form1;
 
-public:
-	LottoBall(int minval, int maxval, Form1^ form1);
-	~LottoBall();
+	public ref class LottoBall
+	{
 
-	int getCurrentValue();
-	int num;
+	public:
+		LottoBall(int minval, int maxval, Form1^ form1, int num1);
+		~LottoBall();
 
-	System::Void start();
-	System::Void stop();
-	System::Void initThread();
+		int getCurrentValue();
+		int num;
 
-private:
-	int minVal;
-	int maxVal;
-	int seedValue;
+		System::Void start();
+		System::Void stop();
+		System::Void abort();
 
-	Form1^ formptr;
+		System::Void initThread();
+		System::Boolean isRunning();
+		System::Boolean isDisplaying();
+		System::Boolean getPoolRun();
 
-	Random^ r;
+	private:
+		int minVal;
+		int maxVal;
+		int seedValue;
+		bool poolRun;
+		bool threadAbort;
+		bool threadStop;
+		Form1^ formptr;
 
-	bool threadStop;
-	Thread^ thread;
-	System::Void run();
+		Random^ r;
 
-};
+		Thread^ thread;
+		System::Void run();
+		System::Boolean isUnique(int num);
+
+	};
+}

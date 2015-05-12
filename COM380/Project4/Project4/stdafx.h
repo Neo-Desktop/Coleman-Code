@@ -4,3 +4,5 @@
 #pragma once
 
 // TODO: reference additional headers your program requires here
+#include "LottoBall.h"
+#include "Form1.h"

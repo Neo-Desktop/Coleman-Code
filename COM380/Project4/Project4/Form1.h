@@ -1,6 +1,5 @@
 #pragma once
 #include "stdafx.h"
-#include "LottoBall.h"
 
 namespace Project4
 {
@@ -17,6 +16,8 @@ namespace Project4
 	/// </summary>
 	public ref class Form1 : public System::Windows::Forms::Form
 	{
+		delegate void SetNumDelegate(int index, int number);
+
 	public:
 		Form1(void)
 		{
@@ -115,8 +116,10 @@ namespace Project4
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->fileToolStripMenuItem, 
-				this->helpToolStripMenuItem});
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->fileToolStripMenuItem,
+					this->helpToolStripMenuItem
+			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Size = System::Drawing::Size(669, 24);
@@ -125,7 +128,7 @@ namespace Project4
 			// 
 			// fileToolStripMenuItem
 			// 
-			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->exitToolStripMenuItem});
+			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->exitToolStripMenuItem });
 			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
 			this->fileToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Alt | System::Windows::Forms::Keys::F));
 			this->fileToolStripMenuItem->Size = System::Drawing::Size(37, 20);
@@ -141,7 +144,7 @@ namespace Project4
 			// 
 			// helpToolStripMenuItem
 			// 
-			this->helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->aboutToolStripMenuItem});
+			this->helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->aboutToolStripMenuItem });
 			this->helpToolStripMenuItem->Name = L"helpToolStripMenuItem";
 			this->helpToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Alt | System::Windows::Forms::Keys::H));
 			this->helpToolStripMenuItem->Size = System::Drawing::Size(44, 20);
@@ -183,6 +186,7 @@ namespace Project4
 			// 
 			// radioButton6
 			// 
+			this->radioButton6->AutoCheck = false;
 			this->radioButton6->AutoSize = true;
 			this->radioButton6->Location = System::Drawing::Point(581, 86);
 			this->radioButton6->Name = L"radioButton6";
@@ -190,9 +194,11 @@ namespace Project4
 			this->radioButton6->TabIndex = 13;
 			this->radioButton6->TabStop = true;
 			this->radioButton6->UseVisualStyleBackColor = true;
+			this->radioButton6->Click += gcnew System::EventHandler(this, &Form1::radioButton1_CheckedChanged);
 			// 
 			// radioButton5
 			// 
+			this->radioButton5->AutoCheck = false;
 			this->radioButton5->AutoSize = true;
 			this->radioButton5->Location = System::Drawing::Point(475, 86);
 			this->radioButton5->Name = L"radioButton5";
@@ -200,9 +206,11 @@ namespace Project4
 			this->radioButton5->TabIndex = 12;
 			this->radioButton5->TabStop = true;
 			this->radioButton5->UseVisualStyleBackColor = true;
+			this->radioButton5->Click += gcnew System::EventHandler(this, &Form1::radioButton1_CheckedChanged);
 			// 
 			// radioButton4
 			// 
+			this->radioButton4->AutoCheck = false;
 			this->radioButton4->AutoSize = true;
 			this->radioButton4->Location = System::Drawing::Point(369, 86);
 			this->radioButton4->Name = L"radioButton4";
@@ -210,9 +218,11 @@ namespace Project4
 			this->radioButton4->TabIndex = 11;
 			this->radioButton4->TabStop = true;
 			this->radioButton4->UseVisualStyleBackColor = true;
+			this->radioButton4->Click += gcnew System::EventHandler(this, &Form1::radioButton1_CheckedChanged);
 			// 
 			// radioButton3
 			// 
+			this->radioButton3->AutoCheck = false;
 			this->radioButton3->AutoSize = true;
 			this->radioButton3->Location = System::Drawing::Point(263, 86);
 			this->radioButton3->Name = L"radioButton3";
@@ -220,9 +230,11 @@ namespace Project4
 			this->radioButton3->TabIndex = 10;
 			this->radioButton3->TabStop = true;
 			this->radioButton3->UseVisualStyleBackColor = true;
+			this->radioButton3->Click += gcnew System::EventHandler(this, &Form1::radioButton1_CheckedChanged);
 			// 
 			// radioButton2
 			// 
+			this->radioButton2->AutoCheck = false;
 			this->radioButton2->AutoSize = true;
 			this->radioButton2->Location = System::Drawing::Point(157, 86);
 			this->radioButton2->Name = L"radioButton2";
@@ -230,6 +242,7 @@ namespace Project4
 			this->radioButton2->TabIndex = 9;
 			this->radioButton2->TabStop = true;
 			this->radioButton2->UseVisualStyleBackColor = true;
+			this->radioButton2->Click += gcnew System::EventHandler(this, &Form1::radioButton1_CheckedChanged);
 			// 
 			// radioButton1
 			// 
@@ -241,6 +254,7 @@ namespace Project4
 			this->radioButton1->TabIndex = 8;
 			this->radioButton1->TabStop = true;
 			this->radioButton1->UseVisualStyleBackColor = true;
+			this->radioButton1->Click += gcnew System::EventHandler(this, &Form1::radioButton1_CheckedChanged);
 			// 
 			// label6
 			// 
@@ -298,7 +312,7 @@ namespace Project4
 			// 
 			// textBox6
 			// 
-			this->textBox6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->textBox6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->textBox6->Location = System::Drawing::Point(40, 44);
 			this->textBox6->Name = L"textBox6";
@@ -310,73 +324,78 @@ namespace Project4
 			// 
 			// textBox5
 			// 
-			this->textBox5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->textBox5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->textBox5->Location = System::Drawing::Point(146, 44);
 			this->textBox5->Name = L"textBox5";
 			this->textBox5->ReadOnly = true;
 			this->textBox5->Size = System::Drawing::Size(34, 29);
 			this->textBox5->TabIndex = 4;
+			this->textBox5->TabStop = false;
 			this->textBox5->Text = L"00";
 			this->textBox5->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			// 
 			// textBox4
 			// 
-			this->textBox4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->textBox4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->textBox4->Location = System::Drawing::Point(252, 44);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->ReadOnly = true;
 			this->textBox4->Size = System::Drawing::Size(34, 29);
 			this->textBox4->TabIndex = 3;
+			this->textBox4->TabStop = false;
 			this->textBox4->Text = L"00";
 			this->textBox4->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			// 
 			// textBox3
 			// 
-			this->textBox3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->textBox3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->textBox3->Location = System::Drawing::Point(358, 44);
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->ReadOnly = true;
 			this->textBox3->Size = System::Drawing::Size(34, 29);
 			this->textBox3->TabIndex = 2;
+			this->textBox3->TabStop = false;
 			this->textBox3->Text = L"00";
 			this->textBox3->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			// 
 			// textBox2
 			// 
-			this->textBox2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->textBox2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->textBox2->Location = System::Drawing::Point(464, 44);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->ReadOnly = true;
 			this->textBox2->Size = System::Drawing::Size(34, 29);
 			this->textBox2->TabIndex = 1;
+			this->textBox2->TabStop = false;
 			this->textBox2->Text = L"00";
 			this->textBox2->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			// 
 			// textBox1
 			// 
-			this->textBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->textBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->textBox1->Location = System::Drawing::Point(570, 44);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->ReadOnly = true;
 			this->textBox1->Size = System::Drawing::Size(34, 29);
 			this->textBox1->TabIndex = 0;
+			this->textBox1->TabStop = false;
 			this->textBox1->Text = L"00";
 			this->textBox1->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			// 
 			// button1
 			// 
-			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button1->Location = System::Drawing::Point(297, 187);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(74, 50);
 			this->button1->TabIndex = 2;
-			this->button1->Text = L"Start";
+			this->button1->Text = L"Stop";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
 			// 
@@ -391,6 +410,7 @@ namespace Project4
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form1";
 			this->Text = L"Lotto Ball Picker";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &Form1::Form1_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
@@ -404,65 +424,21 @@ namespace Project4
 
 	public: List<LottoBall^>^ balls;
 	public: static array<int>^ numbers;
-	public: System::Void affixNumber(int index, int number)
-			{
-				this->numbers[index] = number;
-				switch (index)
-				{
-				case 0:
-					textBox5->Text = number.ToString("D2");
-					break;
-				case 1:
-					textBox4->Text = number.ToString("D2");
-					break;
-				case 2:
-					textBox4->Text = number.ToString("D2");
-					break;
-				case 3:
-					textBox3->Text = number.ToString("D2");
-					break;
-				case 4:
-					textBox2->Text = number.ToString("D2");
-					break;
-				case 5:
-					textBox1->Text = number.ToString("D2");
-					break;
-				case 6:
-					textBox6->Text = number.ToString("D2");
-					break;
-				}
-			}
 
-	private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e)
-			 {
-				 this->numbers = gcnew array<int> {0, 0, 0, 0, 0, 0};
-				 balls = gcnew List<LottoBall^>;
-				 
-				 for (int i = 0; i < 5; i++)
-				 {
-					 balls->Add(gcnew LottoBall(1, 75, this));
-				 }
+	private: bool isClosing = false;
+	private: List<RadioButton^>^ radioButtons;
 
-				 balls->Add(gcnew LottoBall(1, 15, this));
-			 }
+	public: System::Void SetNum(int index, int number);
 
-	private: System::Void exitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
-			 {
-				 for (int i = 0; i < balls->Count; i++)
-				 {
-					 balls[i]->stop();
-				 }
+	private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void exitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 
-				 Application::Exit();
-			 }
+	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e);
+	private: SetNumDelegate^ sndelegate;
 
-	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e)
-			 {
-				 for (int i = 0; i < balls->Count; i++)
-				 {
-					 balls[i]->start();
-				 }
-			 }
+	private: System::Void Form1_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
+	private: System::Void radioButton1_CheckedChanged(System::Object^  sender, System::EventArgs^  e);
+
 };
 
 }
