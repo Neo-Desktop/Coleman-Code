@@ -292,7 +292,7 @@ GkWindowsForm::GkWindowsForm(void)
 	this->top = 0;
 	this->width = 640;
 	this->height = 480;
-	this->caption = "Window Title";
+	this->caption = "Amrit's COM 380 Slot Machine";
 	//this->windowMode = GkWindowsForm::WindowMode_Windowed;
 	this->windowMode = GkWindowsForm::WindowMode_FullScreen;
 
@@ -337,16 +337,16 @@ bool GkWindowsForm::RegisterWindowClass()
 
 bool GkWindowsForm::CreateFormWindow()
 {
-	long wndStyle = this->windowMode == GkWindowsForm::WindowMode_FullScreen ? WS_POPUP : WS_OVERLAPPEDWINDOW;
+	long wndStyle = this->windowMode == GkWindowsForm::WindowMode_FullScreen ? WS_POPUP | WS_CAPTION: WS_OVERLAPPEDWINDOW | WS_CAPTION;
 	wndStyle |= WS_CLIPCHILDREN | WS_CLIPSIBLINGS;
 
 	// Translate from client rect to window rect
-	RECT wRect = { this->left, this->top, this->left + this->width, this->top + this->height };
+	RECT wRect = { this->left, this->top, this->width, this->height };
 	AdjustWindowRect(&wRect, wndStyle, false);
 
 	this->handle = CreateWindow(GkWindowsForm::FormClassName, this->caption,
 							    wndStyle,
-								this->left, this->top, wRect.right - wRect.left, wRect.bottom - wRect.top,
+								this->left, this->top, 0, 0,
 							    NULL, NULL,
 								this->applicationInstance,
 							    NULL);
@@ -385,8 +385,8 @@ void GkWindowsForm::SetSize(int width, int height)
 
 void GkWindowsForm::SetStyle()
 {
-	SetWindowLong(this->handle, GWL_STYLE, WS_POPUP | WS_MINIMIZEBOX);
-	SetWindowLong(this->handle, GWL_EXSTYLE, 0);
+	SetWindowLong(this->handle, GWL_STYLE, WS_POPUP | WS_MINIMIZEBOX | WS_MAXIMIZEBOX);
+	SetWindowLong(this->handle, GWL_EXSTYLE, WS_EX_APPWINDOW);
 	//SetWindowLong(this->handle, GWL_STYLE, WS_POPUP);
 	//SetWindowLong(this->handle, GWL_EXSTYLE, WS_EX_APPWINDOW);
 }

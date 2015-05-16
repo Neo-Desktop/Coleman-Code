@@ -425,7 +425,7 @@ namespace Project4
 	public: List<LottoBall^>^ balls;
 	public: static array<int>^ numbers;
 
-	private: bool isClosing = false;
+	private: bool isClosing;
 	private: List<RadioButton^>^ radioButtons;
 
 	public: System::Void SetNum(int index, int number);

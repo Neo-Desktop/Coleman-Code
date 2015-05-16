@@ -23,7 +23,7 @@ MainWindow::MainWindow(void)
 	this->game = new CustomGame(this->graphicsDevice, this->soundDevice);
 
 	this->SetPosition(0, 0);
-	this->SetSize(800, 600);
+	this->SetSize(815, 638);
 	this->SetActive();
 }
 
