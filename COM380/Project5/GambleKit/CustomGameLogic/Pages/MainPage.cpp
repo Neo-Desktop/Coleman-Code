@@ -41,18 +41,23 @@ MainPage::MainPage(CustomGame *game)
 	// Create the combinations generator. The combinations generator represents a model of collection of reels. Each of its reels can have a different model
 	// The GkGameReelStripModel is a GkGameReelModel, representing a reel with a fixed sequence of finite number of items. Here, it is used for all the reels of the combination generator.
 	this->combinationsGenerator = new GkGameReelsCombinationGenerator(5, 3);
-	this->combinationsGenerator->SetReelModel(0, new GkGameReelStripModel(3, 6, ReelItem_Cherry, ReelItem_Melon, ReelItem_Cherry, ReelItem_Bell, ReelItem_Cherry, ReelItem_Melon));
-	this->combinationsGenerator->SetReelModel(1, new GkGameReelStripModel(3, 6, ReelItem_Bell, ReelItem_Melon, ReelItem_Bell, ReelItem_Melon, ReelItem_Melon, ReelItem_Cherry));
-	this->combinationsGenerator->SetReelModel(2, new GkGameReelStripModel(3, 6, ReelItem_Cherry, ReelItem_7, ReelItem_Melon, ReelItem_Cherry, ReelItem_7, ReelItem_Bell));
-	this->combinationsGenerator->SetReelModel(3, new GkGameReelStripModel(3, 6, ReelItem_Cherry, ReelItem_Bell, ReelItem_Melon, ReelItem_Bell, ReelItem_Cherry, ReelItem_Bell));
-	this->combinationsGenerator->SetReelModel(4, new GkGameReelStripModel(3, 6, ReelItem_Cherry, ReelItem_Melon, ReelItem_Bell, ReelItem_Cherry, ReelItem_Melon, ReelItem_Bell));
+	this->combinationsGenerator->SetReelModel(0, new GkGameReelStripModel(3, 6, ReelItem_Cherry, ReelItem_Space, ReelItem_Cherry, ReelItem_Grape, ReelItem_Cherry, ReelItem_Lemon));
+	this->combinationsGenerator->SetReelModel(1, new GkGameReelStripModel(3, 6, ReelItem_Grape,  ReelItem_Lemon, ReelItem_Space, ReelItem_Lemon, ReelItem_Lemon, ReelItem_Cherry));
+	this->combinationsGenerator->SetReelModel(2, new GkGameReelStripModel(3, 6, ReelItem_Cherry, ReelItem_7, ReelItem_Lemon, ReelItem_Cherry, ReelItem_7, ReelItem_Space));
+	this->combinationsGenerator->SetReelModel(3, new GkGameReelStripModel(3, 6, ReelItem_Cherry, ReelItem_Bar1, ReelItem_Bar2, ReelItem_Space, ReelItem_Cherry, ReelItem_Grape));
+	this->combinationsGenerator->SetReelModel(4, new GkGameReelStripModel(3, 6, ReelItem_Cherry, ReelItem_Space, ReelItem_Bar3, ReelItem_Cherry, ReelItem_Lemon, ReelItem_Grape));
 
 	// Create the visual object for the reels
-	this->reels = (GkGameReels*)this->AddEntity(new GkGameReels(5, 3, 4, 670, 331));
+	this->reels = (GkGameReels*)this->AddEntity(new GkGameReels(5, 3, 8, 670, 331));
+	this->reels->symbols[ReelItem_Space ] = game->AcquireAnimatedTexture(L"symbol_space.png");
 	this->reels->symbols[ReelItem_Cherry] = game->AcquireAnimatedTexture(L"symbol_cherry.png");
-	this->reels->symbols[ReelItem_Melon	] = game->AcquireAnimatedTexture(L"symbol_melon.png");
-	this->reels->symbols[ReelItem_Bell	] = game->AcquireAnimatedTexture(L"symbol_bell.png");
-	this->reels->symbols[ReelItem_7		] = game->AcquireAnimatedTexture(L"symbol_7.png");
+	this->reels->symbols[ReelItem_Grape	] = game->AcquireAnimatedTexture(L"symbol_grape.png");
+	this->reels->symbols[ReelItem_Lemon ] = game->AcquireAnimatedTexture(L"symbol_lemon.png");
+	this->reels->symbols[ReelItem_7		] = game->AcquireAnimatedTexture(L"symbol_seven.png");
+	this->reels->symbols[ReelItem_Bar1  ] = game->AcquireAnimatedTexture(L"symbol_bar1.png");
+	this->reels->symbols[ReelItem_Bar2  ] = game->AcquireAnimatedTexture(L"symbol_bar2.png");
+	this->reels->symbols[ReelItem_Bar3  ] = game->AcquireAnimatedTexture(L"symbol_bar3.png");
+
 	this->reels->x = 62;
 	this->reels->y = 90;
 	this->reels->ApplyReelMap();// (this->game->settings->playerSettings->currentMap);
@@ -66,11 +71,15 @@ MainPage::MainPage(CustomGame *game)
 	this->lineAnimations[4] = (GkGameAnimation*)this->AddEntity(new GkGameAnimation(game->AcquireAnimatedTexture(L"line45.png"), 112, 139, true, true, true, false, true));
 
 	// The winnings model defines two things. One is the properties of the symbols - their coefficients and special behaviour. Second - the shape of the winning lines.
-	this->winningsModel = new GkGameWinningsModel(5, 3, 5, 4, 0);
-	this->winningsModel->SetupSymbol(ReelItem_Cherry, 0, GkGameWinningsModel::SymbolFlag_Default,		GkGameWinningsModel::SymbolFlag_None,	0, 0, 10, 20, 80);
-	this->winningsModel->SetupSymbol(ReelItem_Melon	, 0, GkGameWinningsModel::SymbolFlag_Default,		GkGameWinningsModel::SymbolFlag_None,	0, 0, 20, 40, 200);
-	this->winningsModel->SetupSymbol(ReelItem_Bell	, 0, GkGameWinningsModel::SymbolFlag_Default,		GkGameWinningsModel::SymbolFlag_None,	0, 0, 50, 100, 500);
-	this->winningsModel->SetupSymbol(ReelItem_7		, 0, GkGameWinningsModel::SymbolFlag_Wild,			GkGameWinningsModel::SymbolFlag_None,	0, 0, 0, 0, 0);
+	this->winningsModel = new GkGameWinningsModel(5, 3, 5, 8, 0);
+	this->winningsModel->SetupSymbol(ReelItem_Space	, 0, GkGameWinningsModel::SymbolFlag_Default,		GkGameWinningsModel::SymbolFlag_None,	0, 0, 0, 0, 0);
+	this->winningsModel->SetupSymbol(ReelItem_Cherry, 0, GkGameWinningsModel::SymbolFlag_Wild,			GkGameWinningsModel::SymbolFlag_None,	0, 0, 10, 20, 80);
+	this->winningsModel->SetupSymbol(ReelItem_Grape	, 0, GkGameWinningsModel::SymbolFlag_Default,		GkGameWinningsModel::SymbolFlag_None,	0, 0, 20, 40, 200);
+	this->winningsModel->SetupSymbol(ReelItem_Lemon	, 0, GkGameWinningsModel::SymbolFlag_Default,		GkGameWinningsModel::SymbolFlag_None,	0, 0, 50, 100, 500);
+	this->winningsModel->SetupSymbol(ReelItem_7		, 0, GkGameWinningsModel::SymbolFlag_Default,		GkGameWinningsModel::SymbolFlag_Wild,	0, 0, 1000, 10000, 100000);
+	this->winningsModel->SetupSymbol(ReelItem_Bar1	, 0, GkGameWinningsModel::SymbolFlag_Default,		GkGameWinningsModel::SymbolFlag_Wild,	0, 0, 1000, 10000, 100000);
+	this->winningsModel->SetupSymbol(ReelItem_Bar2	, 0, GkGameWinningsModel::SymbolFlag_Default,		GkGameWinningsModel::SymbolFlag_Wild,	0, 0, 1000, 10000, 100000);
+	this->winningsModel->SetupSymbol(ReelItem_Bar3	, 0, GkGameWinningsModel::SymbolFlag_Default,		GkGameWinningsModel::SymbolFlag_Wild,	0, 0, 1000, 10000, 100000);
 	this->winningsModel->SetupLine(0, 1, 1, 1, 1, 1);
 	this->winningsModel->SetupLine(1, 0, 0, 0, 0, 0);
 	this->winningsModel->SetupLine(2, 2, 2, 2, 2, 2);
@@ -82,6 +91,8 @@ MainPage::MainPage(CustomGame *game)
 
 	this->sndReels = game->AcquireSoundSource(L"reels.wav");
 	this->sndReelStop = game->AcquireSoundSource(L"reel.wav");
+	this->sndBlip = game->AcquireSoundSource(L"start.wav");
+	game->soundDevice->PlaySource(this->sndBlip);
 }
 
 
@@ -118,6 +129,8 @@ void MainPage::Process(GkGame *game)
 		if (this->btnBet->IsClicked())
 		{
 			this->bet = this->bet % 10 + 1;
+			game->soundDevice->PlaySource(this->sndBlip);
+			
 		}
 
 		// Lines button - set which lines in the winnings model are active
@@ -127,6 +140,8 @@ void MainPage::Process(GkGame *game)
 			
 			for (int lineIndex = 0; lineIndex < this->winningsModel->numLines; lineIndex++)
 				this->winningsModel->lines[lineIndex].active = lineIndex < this->lines;
+
+			game->soundDevice->PlaySource(this->sndBlip);
 		}
 			
 	}

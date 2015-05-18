@@ -73,6 +73,8 @@ void MainWindow::Resize(int width, int height)
 
 void MainWindow::KeyDown(int keyCode)
 {
+	if (keyCode == VK_SPACE)
+
 	if (keyCode == VK_ESCAPE)
 		this->DestroyFormWindow();
 }

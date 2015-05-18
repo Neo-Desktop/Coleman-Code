@@ -14,6 +14,7 @@ CustomGame::CustomGame(GkGraphicsDevice *graphicsDevice, GkSoundDevice *soundDev
 	//this->settings = new Settings(CustomGame::settingsFileName, this);
 	
 	this->AddGamePage(new MainPage(this));
+
 }
 
 

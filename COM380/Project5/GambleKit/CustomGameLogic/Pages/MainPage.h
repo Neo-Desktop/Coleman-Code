@@ -7,10 +7,14 @@ class MainPage :
 {
 public:
 
-	static const int ReelItem_Cherry	= 0,
-					 ReelItem_Melon		= 1,
-					 ReelItem_Bell		= 2,
-					 ReelItem_7			= 3;
+	static const int ReelItem_Space		= 0,
+					 ReelItem_Cherry	= 1,
+					 ReelItem_Grape		= 2,
+					 ReelItem_Lemon		= 3,
+					 ReelItem_7			= 4,
+					 ReelItem_Bar1		= 5,
+					 ReelItem_Bar2		= 6,
+					 ReelItem_Bar3		= 7;
 
 
 	GkGameClickButton *btnStart, *btnBet, *btnLines;
@@ -27,7 +31,8 @@ public:
 
 	int bet, lines, winning, credits;
 
-	GkSoundSource *sndReels, *sndReelStop;
+	GkSoundSource *sndReels, *sndReelStop, *sndBlip;
+
 
 	MainPage(CustomGame *game);
 	~MainPage(void);
