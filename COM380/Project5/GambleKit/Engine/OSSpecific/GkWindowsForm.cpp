@@ -11,6 +11,7 @@
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #include "GkWindowsForm.h"
+#include "../../resource.h"
 
 #include <windowsx.h>
 
@@ -292,7 +293,7 @@ GkWindowsForm::GkWindowsForm(void)
 	this->top = 0;
 	this->width = 640;
 	this->height = 480;
-	this->caption = "Amrit's COM 380 Slot Machine";
+	this->caption = "Amrit's COM 380 Money Machine";
 	//this->windowMode = GkWindowsForm::WindowMode_Windowed;
 	this->windowMode = GkWindowsForm::WindowMode_FullScreen;
 
@@ -319,13 +320,15 @@ bool GkWindowsForm::RegisterWindowClass()
 	//memfun = &GkWindowsForm::WndProc;
     //this->ex.lpfnWndProc = *((WNDPROC*) (&memfun));
 
+	HMODULE hMainMod = GetModuleHandle(0);
+
 	this->windowClass.cbSize = sizeof(WNDCLASSEX);
     this->windowClass.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
 	this->windowClass.lpfnWndProc = (WNDPROC)GkWindowsForm::WndProc;
     this->windowClass.cbClsExtra = 0;
     this->windowClass.cbWndExtra = 0;
     this->windowClass.hInstance = this->applicationInstance;
-    this->windowClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+	this->windowClass.hIcon = LoadIcon(hMainMod, MAKEINTRESOURCE(IDI_ICON1));
     this->windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
     this->windowClass.hbrBackground = NULL;
     this->windowClass.lpszMenuName = NULL;
@@ -337,7 +340,7 @@ bool GkWindowsForm::RegisterWindowClass()
 
 bool GkWindowsForm::CreateFormWindow()
 {
-	long wndStyle = this->windowMode == GkWindowsForm::WindowMode_FullScreen ? WS_POPUP | WS_CAPTION: WS_OVERLAPPEDWINDOW | WS_CAPTION;
+	long wndStyle = this->windowMode == GkWindowsForm::WindowMode_FullScreen ? WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME : WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME;
 	wndStyle |= WS_CLIPCHILDREN | WS_CLIPSIBLINGS;
 
 	// Translate from client rect to window rect

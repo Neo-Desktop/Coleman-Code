@@ -183,12 +183,20 @@
     <ClInclude Include="Engine\Utils\GkMaths.h" />
     <ClInclude Include="Engine\Utils\GkStrings.h" />
     <ClInclude Include="Engine\GambleKit.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\License.txt" />
     <None Include="Intruduction.txt" />
     <None Include="ReadMe.txt" />
     <None Include="version.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\application.ico" />
+    <Image Include="..\money.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

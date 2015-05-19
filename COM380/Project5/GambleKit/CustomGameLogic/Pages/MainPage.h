@@ -31,7 +31,9 @@ public:
 
 	int bet, lines, winning, credits;
 
-	GkSoundSource *sndReels, *sndReelStop, *sndBlip;
+	bool isPlayingReels;
+
+	GkSoundSource *sndReels, *sndReelStop, *sndBlip, *sndGameOver, *sndWinBig, *sndWinSmall;
 
 
 	MainPage(CustomGame *game);

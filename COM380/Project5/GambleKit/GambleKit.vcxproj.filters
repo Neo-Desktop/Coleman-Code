@@ -339,11 +339,19 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Engine\GkDefinitions.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
     <None Include="Intruduction.txt" />
     <None Include="..\License.txt" />
     <None Include="version.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\application.ico" />
+    <Image Include="..\money.ico" />
   </ItemGroup>
 </Project>
