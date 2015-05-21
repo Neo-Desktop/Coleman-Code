@@ -16,11 +16,14 @@
 
 Imports System.Data.SqlClient
 Imports System.Configuration
+Imports System.Collections.Generic
 
 
 Namespace VBWinFormDataGridView.DataGridViewPaging
 
     Public Class MainForm
+        Implements IOrderInformationRetriever
+
         Private PageSize As Integer = 30
         Private CurrentPageIndex As Integer = 1
         Private TotalPage As Integer
@@ -28,6 +31,7 @@ Namespace VBWinFormDataGridView.DataGridViewPaging
         Private conn As SqlConnection
         Private adapter As SqlDataAdapter
         Private command As SqlCommand
+        Private dtable As DataTable
 
         Private Sub MainForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
             Me.conn = New SqlConnection(connstr)
@@ -95,6 +99,7 @@ Namespace VBWinFormDataGridView.DataGridViewPaging
             Dim view As New DataView(dt)
             view.Sort = "CustomerID"
             Dim dtout As DataTable = view.ToTable()
+            Me.dtable = dtout
             Return dtout
         End Function
 
@@ -131,6 +136,45 @@ Namespace VBWinFormDataGridView.DataGridViewPaging
             Me.GetTotalPageCount()
             Me.dataGridView1.DataSource = GetPageData(Me.CurrentPageIndex)
         End Sub
+
+        Public Function GetOrderInformationAmountTotal() As List(Of OrderInformation) Implements IOrderInformationRetriever.GetOrderInformationAmountTotal
+            Dim dt As DataTable = New DataTable()
+            command.Parameters.Clear()
+            command.CommandType = CommandType.Text
+            command.CommandText = _
+            "SELECT Orders.OrderID, Customers.CompanyName, SUM([Order Details].UnitPrice * [Order Details].Quantity) as Aprice" _
+            & "FROM [Orders]" _
+            & "JOIN [Customers] ON Customers.CustomerID = Orders.CustomerID" _
+            & "JOIN [Order Details] ON [Order Details].OrderID = Orders.OrderID" _
+            & "WHERE Orders.CustomerID = (SELECT TOP 1 CustomerID" _
+            & "FROM [Northwind].dbo.Orders" _
+            & "GROUP BY CustomerID" _
+            & "ORDER BY COUNT(*) DESC)" _
+            & "GROUP BY Customers.CompanyName, Orders.OrderID" _
+            & "ORDER BY Orders.OrderID DESC"
+
+            Try
+                conn.Open()
+                Me.adapter.SelectCommand = command
+                Me.adapter.Fill(dt)
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            Finally
+                conn.Close()
+            End Try
+
+            Dim drlist As New List(Of DataRow)
+            For Each row As DataRow In dt.Rows
+                drlist.Add(CType(row, DataRow))
+            Next
+            Return drlist.Select(Function(rowin As DataRow)
+                                     Return New OrderInformation With {
+                                         .CompanyName = rowin.Item("CompanyName"),
+                                         .OrderId = rowin.Item("OrderID"),
+                                         .OrderUnitPrice = rowin.Item("Aprice")
+                                         }
+                                 End Function)
+        End Function
     End Class
 
 End Namespace
