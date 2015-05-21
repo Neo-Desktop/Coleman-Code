@@ -10,7 +10,7 @@ MainPage::MainPage(CustomGame *game)
 	this->bet = 10;
 	this->lines = 5;
 	this->winning = 0;
-	this->credits = 1000;
+	this->credits = 100;
 
 	// Add the background
 	this->AddEntity(new GkGameAnimation(game->AcquireAnimatedTexture(L"Background.png")));

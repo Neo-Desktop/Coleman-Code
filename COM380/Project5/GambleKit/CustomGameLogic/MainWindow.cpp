@@ -73,9 +73,9 @@ void MainWindow::Resize(int width, int height)
 
 void MainWindow::KeyDown(int keyCode)
 {
-	if (keyCode == VK_SPACE)
+	if (keyCode == VK_F12)
 	{
-		this->game->mainPage;
+		this->game->mainPage->credits += 100;
 	}
 
 	if (keyCode == VK_ESCAPE)
