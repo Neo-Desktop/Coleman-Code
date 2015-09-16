@@ -3,7 +3,6 @@
 #ifndef H_NODE
 #define H_NODE
 
-
 typedef struct {
 	int a;
 	float b;
@@ -13,7 +12,7 @@ typedef struct {
 	NodeP right;
 	NodeP self;
 
-	void Init(int aIn, float bIn, char *nameIn);
+	void New(int aIn, float bIn, char *nameIn);
 
 }Node, *NodeP;
 

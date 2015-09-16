@@ -11,19 +11,26 @@ private:
 
 public:
 	NodeP *Nodes;
+	NodeP startNode;
 
 	void Init(int initialSize);
+	int  Size();
+	int  Length();
 
-	int Add(NodeP nodeIn);
-	NodeP GetAt(int index);
+	void    Add(int aIn, float bIn, char *nameIn);
+	NodeP   GetAt(int index);
 	boolean InsertAt(int index, NodeP nodeIn);
 	boolean DeleteAt(int index);
 
 	void Sort();
-	void Swap(int id1, int id2);
+	boolean Swap(int id1, int id2);
+
+	void Destroy();
+	void ReorderRefrence();
 
 } NodeManager, *NodeManagerP;
 
-NodeManagerP NewNodeManager(int size);
+#define N_INITIALSIZE 10
+NodeManagerP NewNodeManager(int size = N_INITIALSIZE);
 
 #endif
